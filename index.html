@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Dec12</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        #container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 80vh;
+            width: 100vw;
+            margin: 0;
+        }
+
+        #btn {
+            margin: 20px;
+            border-radius: 6px;
+            cursor: pointer;
+            border: 2px solid black;
+            height: 35px;
+            width: 100px;
+        }
+
+        #btn:hover {
+            color: white;
+            background-color: black;
+            border: none;
+        }
+    </style>
+    <script>
+        function fnGetData() {
+            var memeref = document.getElementById("meme1");
+            fetch("https://meme-api.herokuapp.com/gimme")
+                .then((output) => {
+                    console.log(output);
+                    return output.json();
+                }).then((myLog) => {
+                    console.log(myLog.url);
+                    memeref.src = myLog.url;
+                    memeref.style.height = "550px";
+                    memeref.style.width = "550px";
+                    memeref.style.border = "2px solid black";
+                })
+                .catch((errormsg) => {
+                    alert("Error while getting the data");
+                })
+        }
+    </script>
+</head>
+
+<body>
+    <div style="text-align: center;">
+    <button id="btn" onclick="fnGetData()" style="text-align: center;">Get The Data</button>
+    <div id="container">
+        <img id="meme1" />
+    </div>
+</div>
+</body>
+
+</html>
